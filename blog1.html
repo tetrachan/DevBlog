@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Devlogs</title>
+  <title>Bash Scripts for SSH</title>
   <style>
     body {width: 82%;margin: 1em auto;background: #222;color:#ccc;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";line-height: 1.5;font-size:18px;}
     a:link{color:#6789ab;}
@@ -21,18 +21,26 @@
 <body>
 
   <div class="step">
-    <a href=blog1.html><h1 id="creating-a-bash-script-to-ssh-into-a-server">Blog 1: Creating a bash script to ssh into a server</h1></a>
+    <h1 id="creating-a-bash-script-to-ssh-into-a-server">Creating a bash script to ssh into a server</h1>
     <h3> <em>By: Joshua Bentley</em></h3>
     <p><em>This will help us create a script so that we don&#39;t have to remember the ip addresses of servers or our usernames!</em></p>
   </div>
 
   <div class="step">
-
+    <h2 id="step-1-creating-the-file">Step 1: Creating the file</h2>
+    <p> a. We first need to create an .sh file named to your choice.
+      To do this we can run the command</p>
+      <p><code>$ touch logintoserver.sh</code></p>
+      <p>b. Now we need to open the file in a text editor like nano, vim or atom. This is up to you but to open it in nano you would run this command:</p>
+      <p><code>$ nano logintoserver.sh</code></p>
     </div>
 
     <div class="step">
 
-
+      <h2 id="step-2-writing-the-script">Step 2: Writing the script</h2>
+      <p>a. Now that we are editing the text file for our script, we can write whatever we want. Since we want this script to ssh into a server for us, we will start with our ssh command that we would normally use. It will end up looking something like this...</p>
+      <p><code>$ ssh username@serveraddress</code></p>
+      <p>b. Congratulations, now you don&#39;t have to remember the server address in order to login, all you need to remember is your password for the server!</p>
     </div>
 
   </body>
