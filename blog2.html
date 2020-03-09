@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bash Scripts for SSH</title>
+  <style>
+    body {width: 82%;margin: 1em auto;background: #222;color:#ccc;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";line-height: 1.5;font-size:18px;}
+    a:link{color:#6789ab;}
+    a:active{color:#eee;}
+    a:hover{color:cyan;}
+    a:visited{color:#789abc;}
+    .step {background: #333;margin: 1em; padding: 1em;border: 1px solid #444;border-radius:4px;}
+    code {background: #555; color:#ddd; padding: .35em .75em .3em .75em;}
+    h3 {border-bottom: 1px solid #e0e0e0; padding-bottom: .5em;}
+    p:first-child {padding-top: 0;margin-top:0;}
+    img {width: 100%; height: auto;}
+  </style>
+</head>
+
+<body>
+
+<div class="step">
+  <h1 id="creating-the-vagrant-box-right-for-php-development-and-more">Creating the Vagrant Box Right for PHP Development and More!</h1>
+  <h3> <em>By: Joshua Bentley</em></h3>
+  <p><em>This will show how to set up vagrant boxes with scripts to automatically get the packages you need and up to date at that!</em></p>
+</div>
+
+  <div class="step">
+  <h2 id="step-1-finding-your-box-and-making-a-vagrantfile">Step 1: Finding your box and Making a Vagrantfile</h2>
+  <p> a. We first need to find the vagrant box right for you. For me, since I want the latest and greatest, I will use Ubuntu 18.04, which is listed as &quot;bionic64&quot; under &quot;ubuntu&quot;. So lets create our vagrant file by typing:</p>
+  <p><code>$ touch Vagrantfile</code></p>
+  <p>b. Now we need to open the file in a text editor like nano, vim or atom. This is up to you but to open it in nano you would run this command:</p>
+  <p><code>$ nano Vagrantfile</code></p>
+  <p>c. Once inside the file, to make it use ubuntu 18.04 64bit, we should add:</p>
+  <p><code>Vagrant.configure(&quot;2&quot;) do |config|</code></p>
+  <p>and</p>
+  <p><code>config.vm.box = &quot;ubuntu/bionic64&quot;</code></p>
+</div>
+
+  <div class="step">
+  <h2 id="step-2-opening-the-ports-and-syncing-folders">Step 2: Opening the ports and Syncing Folders</h2>
+  <p>a. First, we must open our ports in order to access our virtual machines php files on the our own computer. Since we only need to access it on our local machine, we can add this line to our Vagrantfile:</p>
+  <p><code>config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080, host_ip: &quot;127.0.0.1&quot;</code></p>
+  <p>This allows us to go to 127.0.0.1:8080 in our browser to access any php and html files in our html folder.</p>
+  <p>b. Now that we have opened our ports, we need to sync up the html folder with our current folder so that our php files will be in the correct place to be accessed. To sync up our folders, we can add this line:</p>
+  <p><code>config.vm.synced_folder &quot;.&quot;, &quot;/var/www/html&quot;</code></p>
+  <p>After this, add this to the bottom of our vagrantfile to close it off:</p>
+  <p><code>end</code></p>
+  <p>Congratulations, at this point as long as you have installed all the lamp server requisites on your virtual machine by hand, you can now access and preview your php files and use things like phpmyadmin to create mysql databases! However, we can make this easier to do through adding a script.</p>
+</div>
+
+<div class="step">
+  <h2 id="step-3-scripting-in-a-vagrantfile">Step 3: Scripting in a Vagrantfile</h2>
+  <p>a. Adding a script to the launch of our vagrantfile will allow us to automatically install certain packages upon launch in case our box ever needs to be relaunched or destroyed without a backup. To add a script, we can add this to our Vagrantfile before &quot;end&quot;:</p>
+  <p><code>config.vm.provision &quot;shell&quot;, path: &quot;script.sh&quot;</code></p>
+  <p>b. in order to create the script, just create a script called script.sh in the same folder as our Vagrantfile and add any commands you like to it. For example in our script we could add a line to install a package like:</p>
+  <p><code>sudo apt-get install apache2 -y</code></p>
+  <p>Which installs apache2 and says y(yes) to any prompts.</p>
+  <p>Create this script for whatever packages you need and then you won&#39;t have to do a thing after creating your vagrant box!</p>
+</div>
+
+  </body>
+
+  </html>
